@@ -15,7 +15,7 @@ try:
 except IndexError:
     ip_address = None
 # Token do ipinfo.io
-access_token = 'e7021c81aa341c'
+access_token = 'KEY'
 handler = ipinfo.getHandler(access_token)
 details = handler.getDetails(gethostbyname(ip_address))
 
