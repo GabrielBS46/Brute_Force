@@ -2,6 +2,7 @@ import sys
 import pymysql
 import time
 import os
+import colorama
 import banco # Conexão com o banco
 
 # import pymysql
@@ -12,6 +13,14 @@ import banco # Conexão com o banco
 #     password='Senha',
 #     cursorclass=pymysql.cursors.DictCursor)
 
+### Colors
+color = colorama.Fore
+green = color.GREEN
+red = color.RED
+blue = color.BLUE
+reset = color.RESET
+
+
 ### Comunicando com MariaDB, importando conf da biblioteca banco
 def conecta():
     try:
@@ -19,7 +28,7 @@ def conecta():
         con = banco.con
         
     except pymysql.Error as e:
-        print(f"Erro ao conectar: {e}")
+        print(f"{red}Erro ao conectar: {e} {reset}")
         sys.exit
 
 ### Opção1, cadastro de um novo site
@@ -38,13 +47,13 @@ def cad_site():
                 try:
                     c.execute(sql)
                     con.commit()
-                    print ("\nAdicionado com Sucesso")
+                    print (f"{green}\nAdicionado com Sucesso{reset}")
                 except pymysql.Error as e:
-                    print(f"\nErro ao Adicionar: {e}")
+                    print(f"{red}\nErro ao Adicionar: {e} {reset}")
             else:
-                print(f"\nSite {site} já está cadastrado")
+                print(f"{red}\nSite {site} já está cadastrado{reset}")
         except pymysql.Error as e:
-            print(f"\nErro ao Adicionar: {e}")
+            print(f"{red}\nErro ao Adicionar: {e}{reset}")
             sys.exit   
         next() 
 
@@ -57,9 +66,9 @@ def show_site():
             c.execute(sql)
             res=c.fetchall()
             for i in res:
-                print(f"Site: {i['site']}\tUsuario: {i['login']}\tSenha: {i['password']}")
+                print(f"{green}Site: {i['site']}\tUsuario: {i['login']}\tSenha: {i['password']}{reset}")
         except pymysql.Error as e:
-            print(f"Erro ao Selecionar: {e}")
+            print(f"{red}Erro ao Selecionar: {e}{reset}")
             sys.exit
         next()
 
@@ -78,13 +87,13 @@ def alter_site():
                 try:
                     c.execute(sql)
                     con.commit()
-                    print ("\nAlterado com Sucesso")
+                    print (f"{green}\nAlterado com Sucesso{reset}")
                 except pymysql.Error as e:
-                    print(f"Erro ao Selecionar: {e}")
+                    print(f"{green}Erro ao Selecionar: {e}{reset}")
             else:
-                print(f"\nSite {site} não cadastrado")
+                print(f"{red}\nSite {site} não cadastrado{reset}")
         except pymysql.Error as e:
-            print(f"\nErro ao Selecionar: {e}")
+            print(f"{red}\nErro ao Selecionar: {e}{reset}")
             sys.exit
         next()
 
@@ -102,13 +111,13 @@ def rem_site():
                 try:
                     c.execute(sql)
                     con.commit()
-                    print ("\nRemovido com Sucesso")
+                    print (f"{green}\nRemovido com Sucesso{reset}")
                 except pymysql.Error as e:
-                    print(f"Erro ao Remover: {e}")
+                    print(f"{red}Erro ao Remover: {e}{reset}")
             else:
-                print(f"\nSite {site} não cadastrado")
+                print(f"{red}\nSite {site} não cadastrado{reset}")
         except pymysql.Error as e:
-            print(f"\nErro ao Remover: {e}")
+            print(f"{red}\nErro ao Remover: {e}{reset}")
             sys.exit   
         next() 
 
@@ -118,11 +127,11 @@ def next():
     if next == "Y" or next == "y" or next == "s" or next == "S":
         clear()
     elif next == "n" or next == "N":
-        print("Até logo")
+        print(f"{green}Até logo{reset}")
         clear()
         sys.exit()
     else:
-        print("Inválido, até logo")
+        print(f"{red}Inválido, até logo{reset}")
         clear()
         sys.exit()      
 
@@ -153,10 +162,10 @@ if __name__ == '__main__':
         elif choice == 4:
             rem_site()
         elif choice == 5:
-            print("\nAté Logo")
+            print(f"{green}\nAté Logo{reset}")
             clear()
             sys.exit()
         else:
-            print("\nInvalido")
+            print(f"{red}\nInvalido{reset}")
             clear()
 
