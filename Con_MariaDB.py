@@ -2,8 +2,17 @@ import sys
 import pymysql
 import time
 import os
-import banco
+import banco # Conexão com o banco
 
+# import pymysql
+# con = pymysql.connect(
+#     host='192.168.1.1',
+#     user='python',
+#     database='python',
+#     password='PyaSSASSIN-10!@#thon',
+#     cursorclass=pymysql.cursors.DictCursor)
+
+### Comunicando com MariaDB, importando conf da biblioteca banco
 def conecta():
     try:
         global con
@@ -13,6 +22,7 @@ def conecta():
         print(f"Erro ao conectar: {e}")
         sys.exit
 
+### Opção1, cadastro de um novo site
 def cad_site():
     site=input("Informe o site para cadastro: ")
     login=input("Informe o login/username: ")
@@ -38,6 +48,7 @@ def cad_site():
             sys.exit   
         next() 
 
+### Opção2, mostrando sites cadastrado no banco
 def show_site():
     conecta()
     with con.cursor() as c:
@@ -52,6 +63,7 @@ def show_site():
             sys.exit
         next()
 
+### Opção3, alterando a senha de algum site
 def alter_site():
     site=input("Qual site ira alterar senha: ")
     conecta()
@@ -76,6 +88,7 @@ def alter_site():
             sys.exit
         next()
 
+### Opção4, removendo site do banco
 def rem_site():
     site=input("Qual site ira alterar senha: ")
     conecta()
@@ -99,6 +112,7 @@ def rem_site():
             sys.exit   
         next() 
 
+### Verificando se deseja continuar com novas buscas
 def next():
     next=input("\nDeseja continuar? Y/n ")
     if next == "Y" or next == "y" or next == "s" or next == "S":
@@ -112,10 +126,12 @@ def next():
         clear()
         sys.exit()      
 
+### Limpeza de tela
 def clear():
     time.sleep(1)
     os.system("clear")
 
+### Inicio do programa
 if __name__ == '__main__':
     os.system('clear')
     while True:
