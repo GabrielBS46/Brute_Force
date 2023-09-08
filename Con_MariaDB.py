@@ -2,17 +2,13 @@ import sys
 import pymysql
 import time
 import os
+import banco
 
 def conecta():
     try:
         global con
-        con = pymysql.connect(
-            host='host',
-            user='user',
-            database='database',
-            password='password',
-            cursorclass=pymysql.cursors.DictCursor
-        )
+        con = banco.con
+        
     except pymysql.Error as e:
         print(f"Erro ao conectar: {e}")
         sys.exit
