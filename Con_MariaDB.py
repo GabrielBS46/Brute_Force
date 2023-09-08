@@ -6,10 +6,10 @@ import banco # Conexão com o banco
 
 # import pymysql
 # con = pymysql.connect(
-#     host='192.168.1.1',
-#     user='python',
-#     database='python',
-#     password='PyaSSASSIN-10!@#thon',
+#     host='IP',
+#     user='usuario',
+#     database='Banco',
+#     password='Senha',
 #     cursorclass=pymysql.cursors.DictCursor)
 
 ### Comunicando com MariaDB, importando conf da biblioteca banco
